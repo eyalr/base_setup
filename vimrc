@@ -149,6 +149,7 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp.vim'
 
 filetype indent plugin on
 noremap <F12> :CommandTFlush<CR>
@@ -157,15 +158,6 @@ python from powerline.vim import setup as powerline_setup; powerline_setup(); de
 set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
-set wildignore=*.po,*.swp,*.bak,*.class,*.pyc,*.jpg,*.pdf,*.jar,*.db,*.gif,*.tif,*.png,*.gz,*.swf,*.ico,django/media/django/node_modules*,conf/keys*,django/media/django/js/src/vendor*,*nosetests.xml,django/media/django/built_modules*,django/scripts/vagrant/modules/stdlib*,django/scripts/vagrant/vagrant_1.4/.vagrant*
+set wildignore=*.po,*.swp,*.bak,*.class,*.pyc,*.jpg,*.pdf,*.jar,*.db,*.gif,*.tif,*.png,*.gz,*.swf,*.ico
 
 cd $CUR_HOME
-
-" Execute a selection of code (very cool!)
-" Use VISUAL to select a range and then hit ctrl-h to execute it.
-python << EOL
-import vim
-def EvaluateCurrentRange():
-    eval(compile('\n'.join(vim.current.range),'','exec'),globals())
-EOL
-map <C-x> :py EvaluateCurrentRange()
