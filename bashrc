@@ -16,7 +16,7 @@ export TERM=xterm-color
 alias ls='ls -G'
 alias ll='ls -hl'
 color_prompt=yes
-PS1='$PS1_CUR_HOME${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
+PS1='$PS1_CUR_HOME${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 alias cdddd="cd ../../../"
 alias cddddd="cd ../../../../"
@@ -25,11 +25,11 @@ set_curhome() {
     git_toplevel=`git rev-parse --show-toplevel 2>/dev/null`
     if [[ "$git_toplevel" && -d "$git_toplevel" ]]; then
         export CUR_HOME=$git_toplevel
-        export PS1_CUR_HOME="(`basename $CUR_HOME`) "
+        export PS1_CUR_HOME="[`basename $CUR_HOME`]"
     fi
 }
 
-venv_cd () {
+extra_cd () {
     if [[ "$#" == "0" ]]; then
         cd "${CUR_HOME}"
     else
@@ -41,7 +41,7 @@ opened() {
     for file in `git status -s | cut -d" " -f3`; do $* $file; done
 }
 
-alias cd="venv_cd"
+alias cd="extra_cd"
 alias sl="ls"
 
 alias vim="mvim -v"
