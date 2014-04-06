@@ -1,1 +1,10 @@
 install homebrew: ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+install macvim: brew install macvim --env-std --override-system-vim
+install python indent plugin: http://www.vim.org/scripts/script.php?script_id=974
+install libgit2: brew install libgit2
+install pygit2: pip install pygit2
+install psutil: pip install psutil
+install powerline: pip install git+git://github.com/Lokaltog/powerline
+install powerline fonts: https://github.com/Lokaltog/powerline-fonts
+install vundle: git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+install the_silver_searcher: brew install the_silver_searcher

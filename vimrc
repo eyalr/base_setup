@@ -2,6 +2,8 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+let &t_Co=256
+
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
@@ -149,7 +151,9 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
+Bundle 'rking/ag.vim'
 
 filetype indent plugin on
 noremap <F12> :CommandTFlush<CR>
@@ -160,4 +164,9 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 
 set wildignore=*.po,*.swp,*.bak,*.class,*.pyc,*.jpg,*.pdf,*.jar,*.db,*.gif,*.tif,*.png,*.gz,*.swf,*.ico
 
-cd $CUR_HOME
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ },
+    \ 'fallback': 'find %s -type f'
+    \ }

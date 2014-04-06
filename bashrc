@@ -11,37 +11,17 @@ CLICOLOR=1
 #sets up the color scheme for list export
 LSCOLORS=gxfxcxdxbxegedabagacad
 #enables color for iTerm
-export TERM=xterm-color
+export TERM=xterm-256color
 #sets up proper alias commands when called
 alias ls='ls -G'
 alias ll='ls -hl'
 color_prompt=yes
-PS1='$PS1_CUR_HOME${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-alias cdddd="cd ../../../"
-alias cddddd="cd ../../../../"
-
-set_curhome() {
-    git_toplevel=`git rev-parse --show-toplevel 2>/dev/null`
-    if [[ "$git_toplevel" && -d "$git_toplevel" ]]; then
-        export CUR_HOME=$git_toplevel
-        export PS1_CUR_HOME="[`basename $CUR_HOME`]"
-    fi
-}
-
-extra_cd () {
-    if [[ "$#" == "0" ]]; then
-        cd "${CUR_HOME}"
-    else
-        cd "$@" && set_curhome
-    fi
-}
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 opened() {
     for file in `git status -s | cut -d" " -f3`; do $* $file; done
 }
 
-alias cd="extra_cd"
 alias sl="ls"
 
 alias vim="mvim -v"
