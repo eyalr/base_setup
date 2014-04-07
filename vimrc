@@ -164,9 +164,14 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 
 set wildignore=*.po,*.swp,*.bak,*.class,*.pyc,*.jpg,*.pdf,*.jar,*.db,*.gif,*.tif,*.png,*.gz,*.swf,*.ico
 
-let g:ctrlp_user_command = {
-    \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files'],
-        \ },
-    \ 'fallback': 'find %s -type f'
-    \ }
+let g:in_git = system('git rev-parse --show-toplevel 2>/dev/null')
+if g:in_git != ''
+    cd `=g:in_git`
+    let g:ctrlp_user_command = 'cd %s && git ls-files . -co --exclude-standard'
+endif
+
+set tags+=.git/tags
+
+cmap w!! w !sudo tee >/dev/null %
+cmap Q q
+set clipboard=unnamed
